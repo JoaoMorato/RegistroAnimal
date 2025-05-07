@@ -1,0 +1,24 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using RepositoryUtil;
+
+namespace AuthRepository.Models;
+
+<#
+var p = Path.GetDirectoryName(this.Host.TemplateFile);
+var a = Directory.GetFiles(p, "*.cs");
+foreach(var f in a){
+	var s = Path.GetFileNameWithoutExtension(f);
+	if(s == "Partials"){
+		continue;
+	}
+#>
+public partial class <#= s #> : TEntity
+{
+
+}
+<# } #>
